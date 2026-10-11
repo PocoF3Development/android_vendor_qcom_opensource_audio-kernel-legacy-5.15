@@ -12,6 +12,8 @@
 #define SNDRV_COMPRESS_CLK_REC_MODE_NONE 0
 #define SNDRV_COMPRESS_CLK_REC_MODE_AUTO 1
 
+/* Generic GKI headers need these; Qualcomm UAPI already provides them. */
+#ifndef SNDRV_COMPRESS_PATH_DELAY
 /**
 * @SNDRV_COMPRESS_PATH_DELAY: dsp path delay in microseconds
 * @SNDRV_COMPRESS_RENDER_MODE: dsp render mode (audio master or stc)
@@ -43,16 +45,30 @@ enum sndrv_compress_encoder_ext {
 #define SNDRV_COMPRESS_ADJUST_SESSION_CLOCK SNDRV_COMPRESS_ADJUST_SESSION_CLOCK
 #define SNDRV_COMPRESS_LATENCY_MODE SNDRV_COMPRESS_LATENCY_MODE
 
+#endif
+
 #define SNDRV_COMPRESS_DSP_POSITION 10
 
 #define COMPRESSED_TIMESTAMP_FLAG 0x0001
 
+#ifndef SND_AUDIOCODEC_TRUEHD
 #define SND_AUDIOCODEC_TRUEHD                ((__u32) 0x00001001)
+#endif
+#ifndef SND_AUDIOCODEC_MP2
 #define SND_AUDIOCODEC_MP2                   ((__u32) 0x00001006)
+#endif
+#ifndef SND_AUDIOCODEC_AC3
 #define SND_AUDIOCODEC_AC3                   ((__u32) 0x00001008)
+#endif
+#ifndef SND_AUDIOCODEC_DTS
 #define SND_AUDIOCODEC_DTS                   ((__u32) 0x0000100A)
+#endif
+#ifndef SND_AUDIOCODEC_EAC3
 #define SND_AUDIOCODEC_EAC3                  ((__u32) 0x0000100B)
+#endif
 
+/* The legacy passthrough UAPI also defines snd_codec_metadata. */
+#ifndef SND_CODEC_COMPRESS_PASSTHROUGH
 /** struct snd_codec_metadata
 * @length: Length of the encoded buffer.
 * @offset: Offset from the buffer address to the first byte of the first
@@ -67,5 +83,7 @@ struct snd_codec_metadata {
 	__u64 timestamp;
 	__u32 reserved[4];
 };
+
+#endif
 
 #endif /* _COMPRESS_EXT */
