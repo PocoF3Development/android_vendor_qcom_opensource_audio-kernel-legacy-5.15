@@ -273,6 +273,11 @@ endif
 
 obj-y += codecs/
 
+
+ifeq ($(CONFIG_US_PROXIMITY),y)
+Q6_OBJS += apr_mius.o mius/mius.o mius/mius_sysfs.o mius/mius_mixer_controls.o mius/io_modules/msm/mius_data_msm_io.o mius/io_modules/userspace/mius_data_userspace_io.o mius/io_modules/userspace/mius_data_userspace_ctrl.o
+endif
+
 obj-$(CONFIG_SND_SOC_MSM_QDSP6V2_INTF) += q6_dlkm.o
 q6_dlkm-y := $(Q6_OBJS)
 

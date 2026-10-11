@@ -110,3 +110,8 @@ static inline void digital_cdc_rsc_mgr_exit(void)
 
 #endif
 
+
+#ifdef CONFIG_US_PROXIMITY
+int mius_driver_init(void);
+void mius_driver_exit(void);
+#endif
