@@ -1009,7 +1009,7 @@ int mius_system_configuration_param_put(struct snd_kcontrol *kcontrol,
 	struct soc_mixer_control *mc =
 		(struct soc_mixer_control *)kcontrol->private_value;
 	struct mius_system_configuration_parameter param;
-	struct timeval tv;
+	struct timespec64 tv;
 
 	if (mc->reg != MIUS_SYSTEM_CONFIGURATION)
 		return -EINVAL;
@@ -1127,7 +1127,7 @@ int mius_system_configuration_param_put(struct snd_kcontrol *kcontrol,
 		param.type = MSC_CALIBRATION_METHOD;
 		param.calibration_method =
 			mius_system_configuration_cache.calibration_method;
-		do_gettimeofday(&tv);
+		ktime_get_real_ts64(&tv);
 		param.calibration_timestamp = (int32_t)tv.tv_sec;
 		break;
 	case MIUS_SYSTEM_CONFIGURATION_DEBUG_MODE:
